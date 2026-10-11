@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { ChevronDown } from 'lucide-react';
 
 interface FaqItem {
@@ -69,7 +70,13 @@ export const FaqSection: React.FC = () => {
   return (
     <section id="faq" className="py-16 sm:py-24 bg-[#FAF6EF]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
           <span className="text-xs uppercase tracking-[0.25em] text-[#C7A36A] font-sans font-bold block mb-2">
             Frequently Asked Questions
           </span>
@@ -79,36 +86,50 @@ export const FaqSection: React.FC = () => {
           <p className="mt-3 text-sm text-[#786B6B]">
             Clear, honest answers about creating, customizing, and printing your marriage biodata.
           </p>
-        </div>
+        </motion.div>
 
         <div className="space-y-3">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
-              <div
+              <motion.div
                 key={idx}
-                className="bg-white border border-[#E7DCD2] rounded-sm transition-all overflow-hidden"
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-30px' }}
+                transition={{ duration: 0.4, delay: idx * 0.04 }}
+                className="bg-white border border-[#E7DCD2] hover:border-[#C7A36A]/50 rounded-sm transition-colors overflow-hidden"
               >
                 <button
                   onClick={() => toggle(idx)}
-                  className="w-full py-4 px-6 text-left flex justify-between items-center gap-4 hover:bg-[#FAF6EF]/50 transition-colors focus:outline-hidden"
+                  className="w-full py-4 px-6 text-left flex justify-between items-center gap-4 hover:bg-[#FAF6EF]/50 transition-colors focus:outline-hidden cursor-pointer"
                   aria-expanded={isOpen}
                 >
                   <span className="font-serif font-medium text-base sm:text-lg text-[#4B1020]">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#C7A36A] transition-transform duration-200 shrink-0 ${
+                    className={`w-5 h-5 text-[#C7A36A] transition-transform duration-300 shrink-0 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
-                {isOpen && (
-                  <div className="px-6 pb-4 pt-1 text-sm text-[#786B6B] leading-relaxed border-t border-[#F1E8DC]">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 pb-4 pt-1 text-sm text-[#786B6B] leading-relaxed border-t border-[#F1E8DC]">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             );
           })}
         </div>

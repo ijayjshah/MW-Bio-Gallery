@@ -58,7 +58,7 @@ export const ContemporaryEditorial: React.FC<TemplateProps> = ({ data, isThumbna
                 src={data.photoUrl}
                 alt={data.fullName || 'Candidate'}
                 referrerPolicy="no-referrer"
-                className="w-full h-56 sm:h-72 object-cover grayscale contrast-125 border border-[#4B1020]"
+                className="w-full h-56 sm:h-72 object-cover border-2 border-[#4B1020] shadow-sm"
               />
             ) : (
               <div className="w-full h-56 sm:h-72 bg-[#E7DCD2] flex flex-col items-center justify-center border border-[#4B1020]">

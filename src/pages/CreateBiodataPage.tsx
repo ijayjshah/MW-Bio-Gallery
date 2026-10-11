@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'motion/react';
+import confetti from 'canvas-confetti';
 import { BiodataData, SiblingRecord, SiblingSelectionType } from '../features/biodata/biodataTypes';
-import { initialBiodataData, sampleBiodataData } from '../features/biodata/biodataDefaults';
+import { initialBiodataData, sampleBiodataData, sampleBrideBiodataData } from '../features/biodata/biodataDefaults';
+import { DEFAULT_GROOM_PORTRAIT, DEFAULT_BRIDE_PORTRAIT } from '../assets/samplePortraits';
 import { calculateAge, formatDobDisplay } from '../features/biodata/biodataFormatting';
 import { TEMPLATE_REGISTRY } from '../templates/templateRegistry';
 import { DocumentRenderer } from '../templates/DocumentRenderer';
@@ -159,12 +162,21 @@ export const CreateBiodataPage: React.FC = () => {
   };
 
   // Fill sample data
-  const handleLoadSample = () => {
+  const handleLoadGroomSample = () => {
     setFormData({
       ...sampleBiodataData,
       templateId: formData.templateId || 'classic-elegance',
     });
   };
+
+  const handleLoadBrideSample = () => {
+    setFormData({
+      ...sampleBrideBiodataData,
+      templateId: formData.templateId || 'royal-burgundy',
+    });
+  };
+
+  const handleLoadSample = handleLoadGroomSample;
 
   // Reset form
   const handleReset = () => {
@@ -177,8 +189,18 @@ export const CreateBiodataPage: React.FC = () => {
     }
   };
 
-  // Print Document (Uses @media print)
+  // Print Document (Uses @media print) with Celebration Confetti
   const handlePrint = () => {
+    try {
+      confetti({
+        particleCount: 85,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#C7A36A', '#4B1020', '#FAF6EF', '#E0B979', '#671C32'],
+      });
+    } catch {
+      // safe fallback
+    }
     window.print();
   };
 
@@ -243,19 +265,28 @@ export const CreateBiodataPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 shrink-0">
             <button
-              onClick={handleLoadSample}
-              className="px-3.5 py-2 text-xs font-semibold text-[#4B1020] bg-[#FAF6EF] hover:bg-white rounded-sm transition-colors flex items-center gap-1.5 shadow-sm"
-              title="Populate with elegant sample data to test templates"
+              onClick={handleLoadGroomSample}
+              className="px-3 py-1.5 text-xs font-semibold text-[#4B1020] bg-[#FAF6EF] hover:bg-white rounded-sm transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
+              title="Populate with authentic Groom profile"
             >
               <Sparkles className="w-3.5 h-3.5 text-[#C7A36A]" />
-              <span>Fill Sample Data</span>
+              <span>🤵 Sample Groom</span>
+            </button>
+
+            <button
+              onClick={handleLoadBrideSample}
+              className="px-3 py-1.5 text-xs font-semibold text-[#4B1020] bg-[#FAF6EF] hover:bg-white rounded-sm transition-colors flex items-center gap-1.5 shadow-sm cursor-pointer"
+              title="Populate with authentic Bride profile"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-[#C7A36A]" />
+              <span>👰 Sample Bride</span>
             </button>
 
             <button
               onClick={handleReset}
-              className="p-2 text-xs text-[#FAF6EF]/80 hover:text-white hover:bg-[#310914] rounded-sm transition-colors"
+              className="p-1.5 text-xs text-[#FAF6EF]/80 hover:text-white hover:bg-[#310914] rounded-sm transition-colors cursor-pointer"
               title="Clear draft"
             >
               <Trash2 className="w-4 h-4" />
@@ -317,8 +348,16 @@ export const CreateBiodataPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Left Column: Form Editor (7 cols) */}
           <div className="lg:col-span-7 bg-white border border-[#E7DCD2] rounded-sm p-6 sm:p-8 shadow-xs no-print">
-            {/* Step 1: Personal Details */}
-            {currentStep === 1 && (
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStep}
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -16 }}
+                transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] as const }}
+              >
+                {/* Step 1: Personal Details */}
+                {currentStep === 1 && (
               <div className="space-y-6">
                 <div className="border-b border-[#F1E8DC] pb-4">
                   <h2 className="text-xl font-serif font-bold text-[#4B1020]">
@@ -356,19 +395,21 @@ export const CreateBiodataPage: React.FC = () => {
                       '॥ श्री गणेशाय नमः ॥',
                       '॥ श्री कुलस्वामिनी प्रसन्न ॥',
                       '॥ ॐ नमः शिवाय ॥',
-                      '॥ ॐ नमो भगवते वासुदेवाय ॥',
                       '॥ जय श्री कृष्ण ॥',
+                      '॥ ॐ नमो भगवते वासुदेवाय ॥',
                       '॥ श्री महालक्ष्मी प्रसन्न ॥',
                       '॥ ॐ श्री व्यंकटेशाय नमः ॥',
-                      '॥ एक ओंकार ॥',
-                      '॥ ॐ अर्हम् ॥',
+                      '॥ जय जिनेन्द्र ॥',
+                      '॥ ੴ सतिगुरु प्रसादि ॥',
+                      '॥ जय माता दी ॥',
                       'In the Name of God',
+                      'Bismillah-ir-Rahman-ir-Rahim',
                     ].map((godPreset) => (
                       <button
                         key={godPreset}
                         type="button"
                         onClick={() => updateField('godName', godPreset)}
-                        className={`px-2.5 py-1 text-xs rounded-xs border transition-all ${
+                        className={`px-2.5 py-1 text-xs rounded-xs border transition-all cursor-pointer ${
                           formData.godName === godPreset
                             ? 'bg-[#4B1020] text-[#FAF6EF] border-[#4B1020] font-semibold shadow-xs'
                             : 'bg-white text-[#292122] border-[#E7DCD2] hover:bg-[#F1E8DC]'
@@ -391,13 +432,13 @@ export const CreateBiodataPage: React.FC = () => {
                 </div>
 
                 {/* Profile Photo Upload */}
-                <div className="p-4 bg-[#FAF6EF] border border-[#E7DCD2] rounded-sm">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#4B1020] mb-2 font-sans">
+                <div className="p-4 bg-[#FAF6EF] border border-[#E7DCD2] rounded-sm space-y-3">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#4B1020] font-sans">
                     Profile Photograph (Optional)
                   </label>
-                  <div className="flex items-center gap-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                     {formData.photoUrl ? (
-                      <div className="relative">
+                      <div className="relative shrink-0 w-20 h-24">
                         <img
                           src={formData.photoUrl}
                           alt="Uploaded Profile"
@@ -406,31 +447,47 @@ export const CreateBiodataPage: React.FC = () => {
                         <button
                           type="button"
                           onClick={removePhoto}
-                          className="absolute -top-2 -right-2 bg-red-800 text-white p-1 rounded-full text-xs shadow-md hover:bg-red-900"
+                          className="absolute -top-2 -right-2 bg-red-800 text-white w-5 h-5 flex items-center justify-center rounded-full text-xs shadow-md hover:bg-red-900 cursor-pointer"
                           title="Remove photo"
                         >
                           ✕
                         </button>
                       </div>
                     ) : (
-                      <div className="w-20 h-24 border-2 border-dashed border-[#C7A36A] rounded-sm flex flex-col items-center justify-center text-center p-2 bg-white text-[#786B6B]">
+                      <div className="w-20 h-24 border-2 border-dashed border-[#C7A36A] rounded-sm flex flex-col items-center justify-center text-center p-2 bg-white text-[#786B6B] shrink-0">
                         <Upload className="w-5 h-5 text-[#C7A36A] mb-1" />
                         <span className="text-[9px]">Add Photo</span>
                       </div>
                     )}
 
-                    <div className="space-y-1">
-                      <label className="inline-block cursor-pointer px-4 py-2 text-xs font-semibold bg-[#4B1020] text-white rounded-sm hover:bg-[#671C32] transition-colors">
-                        Choose Image File
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handlePhotoUpload}
-                          className="hidden"
-                        />
-                      </label>
+                    <div className="space-y-2 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <label className="inline-block cursor-pointer px-4 py-2 text-xs font-semibold bg-[#4B1020] text-white rounded-sm hover:bg-[#671C32] transition-colors shadow-xs">
+                          Choose From Device
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handlePhotoUpload}
+                            className="hidden"
+                          />
+                        </label>
+                        <button
+                          type="button"
+                          onClick={() => updateField('photoUrl', DEFAULT_GROOM_PORTRAIT)}
+                          className="px-2.5 py-1.5 text-xs bg-white border border-[#E7DCD2] hover:bg-[#F1E8DC] rounded-sm text-[#4B1020] font-medium transition-colors cursor-pointer"
+                        >
+                          🤵 Try Groom Photo
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => updateField('photoUrl', DEFAULT_BRIDE_PORTRAIT)}
+                          className="px-2.5 py-1.5 text-xs bg-white border border-[#E7DCD2] hover:bg-[#F1E8DC] rounded-sm text-[#4B1020] font-medium transition-colors cursor-pointer"
+                        >
+                          👰 Try Bride Photo
+                        </button>
+                      </div>
                       <p className="text-[11px] text-[#786B6B]">
-                        JPG, PNG, or WebP. If skipped, an elegant monogram crest will be used.
+                        JPG, PNG, or WebP. If skipped, an elegant monogram crest will be used in your biodata.
                       </p>
                     </div>
                   </div>
@@ -1467,6 +1524,8 @@ export const CreateBiodataPage: React.FC = () => {
                 </div>
               </div>
             )}
+            </motion.div>
+          </AnimatePresence>
 
             {/* Navigation Buttons */}
             <div className="mt-8 pt-4 border-t border-[#F1E8DC] flex justify-between items-center">
@@ -1510,12 +1569,15 @@ export const CreateBiodataPage: React.FC = () => {
           <div className="hidden lg:block lg:col-span-5 sticky top-24 no-print">
             <div className="bg-white border border-[#E7DCD2] p-4 rounded-sm shadow-md">
               <div className="flex items-center justify-between pb-3 mb-3 border-b border-[#F1E8DC] text-xs font-sans">
-                <span className="font-bold text-[#4B1020] uppercase tracking-wider flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#C7A36A]"></span>
+                <span className="font-bold text-[#4B1020] uppercase tracking-wider flex items-center gap-2">
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C7A36A] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C7A36A]"></span>
+                  </span>
                   Live Biodata Preview
                 </span>
-                <span className="text-[#786B6B]">
-                  Updates automatically
+                <span className="text-[#786B6B] text-[11px]">
+                  Updates live
                 </span>
               </div>
 
@@ -1530,7 +1592,7 @@ export const CreateBiodataPage: React.FC = () => {
                 <span>Standard A4 Document Format</span>
                 <button
                   onClick={handlePrint}
-                  className="text-[#4B1020] font-semibold hover:underline flex items-center gap-1"
+                  className="text-[#4B1020] font-semibold hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <Printer className="w-3.5 h-3.5" />
                   Print Now
@@ -1541,48 +1603,63 @@ export const CreateBiodataPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Slide-Up Preview Modal */}
-      {mobilePreviewOpen && (
-        <div
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col justify-end lg:hidden no-print"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="bg-white rounded-t-xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl">
-            <div className="p-4 bg-[#4B1020] text-[#FAF6EF] flex items-center justify-between">
-              <span className="font-serif font-bold text-sm">
-                Live Biodata Preview
-              </span>
-              <button
-                onClick={() => setMobilePreviewOpen(false)}
-                className="text-xs bg-[#FAF6EF]/20 px-3 py-1 rounded-sm text-white"
-              >
-                Close Preview
-              </button>
-            </div>
+      {/* Mobile Slide-Up Preview Modal with AnimatePresence */}
+      <AnimatePresence>
+        {mobilePreviewOpen && (
+          <div
+            className="fixed inset-0 z-50 flex flex-col justify-end lg:hidden no-print"
+            role="dialog"
+            aria-modal="true"
+          >
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setMobilePreviewOpen(false)}
+              className="fixed inset-0 bg-black/60 backdrop-blur-xs"
+            />
+            <motion.div
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ type: 'spring', damping: 28, stiffness: 300 }}
+              className="relative z-10 bg-white rounded-t-xl max-h-[90vh] flex flex-col overflow-hidden shadow-2xl"
+            >
+              <div className="p-4 bg-[#4B1020] text-[#FAF6EF] flex items-center justify-between">
+                <span className="font-serif font-bold text-sm">
+                  Live Biodata Preview
+                </span>
+                <button
+                  onClick={() => setMobilePreviewOpen(false)}
+                  className="text-xs bg-[#FAF6EF]/20 hover:bg-[#FAF6EF]/30 px-3 py-1 rounded-sm text-white cursor-pointer"
+                >
+                  Close Preview
+                </button>
+              </div>
 
-            <div className="p-4 overflow-y-auto flex-1 bg-[#FAF6EF]">
-              <DocumentRenderer data={formData} isThumbnail={false} />
-            </div>
+              <div className="p-4 overflow-y-auto flex-1 bg-[#FAF6EF]">
+                <DocumentRenderer data={formData} isThumbnail={false} />
+              </div>
 
-            <div className="p-4 bg-white border-t border-[#E7DCD2] flex gap-3">
-              <button
-                onClick={handlePrint}
-                className="flex-1 py-2.5 text-xs font-semibold text-[#310914] bg-[#C7A36A] rounded-sm flex items-center justify-center gap-1.5"
-              >
-                <Printer className="w-3.5 h-3.5" />
-                Print / Save PDF
-              </button>
-              <button
-                onClick={() => setMobilePreviewOpen(false)}
-                className="px-4 py-2.5 text-xs font-medium text-[#786B6B] border border-[#E7DCD2] rounded-sm"
-              >
-                Continue Editing
-              </button>
-            </div>
+              <div className="p-4 bg-white border-t border-[#E7DCD2] flex gap-3">
+                <button
+                  onClick={handlePrint}
+                  className="flex-1 py-2.5 text-xs font-semibold text-[#310914] bg-[#C7A36A] hover:bg-[#e0b979] rounded-sm flex items-center justify-center gap-1.5 cursor-pointer shadow-xs"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  Print / Save PDF
+                </button>
+                <button
+                  onClick={() => setMobilePreviewOpen(false)}
+                  className="px-4 py-2.5 text-xs font-medium text-[#786B6B] hover:text-[#292122] border border-[#E7DCD2] rounded-sm cursor-pointer"
+                >
+                  Continue Editing
+                </button>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
 
       {/* Print-Only Container (Rendered off-screen for print media) */}
       <div className="hidden print:block">

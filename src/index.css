@@ -5,7 +5,8 @@
   --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-cinzel: 'Cinzel', serif;
-  --font-script: 'Great Vibes', cursive;
+  --font-marcellus: 'Marcellus', serif;
+  --font-script: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
   --font-royal: 'Cinzel Decorative', serif;
   --font-devanagari: 'Rozha One', 'Cormorant Garamond', serif;
   --color-maroon-900: #310914;
@@ -15,6 +16,7 @@
   --color-cream: #F1E8DC;
   --color-gold: #C7A36A;
   --color-gold-dark: #A37F46;
+  --color-gold-light: #E0B979;
   --color-charcoal: #292122;
   --color-muted: #786B6B;
   --color-border-light: #E7DCD2;
@@ -35,14 +37,60 @@
   animation: gold-shimmer 4s linear infinite;
 }
 
+/* Royal Gold Pulsing Glow */
+@keyframes gold-glow {
+  0%, 100% {
+    box-shadow: 0 0 15px -3px rgba(199, 163, 106, 0.35), 0 0 6px -2px rgba(199, 163, 106, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px 2px rgba(199, 163, 106, 0.6), 0 0 12px 1px rgba(224, 185, 121, 0.4);
+  }
+}
+
+.animate-gold-glow {
+  animation: gold-glow 3s ease-in-out infinite;
+}
+
 /* Subtle floating wedding petals animation */
 @keyframes gentle-float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(1.5deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
 }
 
 .animate-float-slow {
   animation: gentle-float 6s ease-in-out infinite;
+}
+
+/* Sparkle twinkle animation */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.animate-twinkle {
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+
+/* Wedding Ribbon banner shine */
+@keyframes ribbon-sweep {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.ribbon-shimmer-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ribbon-shimmer-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: ribbon-sweep 3.5s ease-in-out infinite;
 }
 
 /* Custom Print Rules for A4 Biodata Export */
