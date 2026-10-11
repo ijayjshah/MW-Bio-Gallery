@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-royal: 'Cinzel Decorative', serif;
+  --font-devanagari: 'Rozha One', 'Cormorant Garamond', serif;
+  --color-maroon-900: #310914;
+  --color-maroon: #4B1020;
+  --color-wine: #671C32;
+  --color-ivory: #FAF6EF;
+  --color-cream: #F1E8DC;
+  --color-gold: #C7A36A;
+  --color-gold-dark: #A37F46;
+  --color-charcoal: #292122;
+  --color-muted: #786B6B;
+  --color-border-light: #E7DCD2;
+}
+
+/* Luxury Wedding Shimmer Animation */
+@keyframes gold-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.text-gold-shimmer {
+  background: linear-gradient(90deg, #C7A36A 0%, #FAF6EF 50%, #C7A36A 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: gold-shimmer 4s linear infinite;
+}
+
+/* Subtle floating wedding petals animation */
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(1.5deg); }
+}
+
+.animate-float-slow {
+  animation: gentle-float 6s ease-in-out infinite;
+}
+
+/* Custom Print Rules for A4 Biodata Export */
+@media print {
+  html, body {
+    background: #FAF6EF !important;
+    color: #292122 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide everything on screen except the biodata printable area */
+  header, footer, nav, .no-print, button, input, [role="dialog"], .print-hidden {
+    display: none !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #biodata-document-print,
+  #biodata-document-print * {
+    visibility: visible;
+  }
+
+  #biodata-document-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+    transform: none !important;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 8mm 6mm;
+  }
+}
+
+/* Document specific styling */
+.biodata-sheet {
+  aspect-ratio: 210 / 297; /* A4 aspect ratio */
+  width: 100%;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

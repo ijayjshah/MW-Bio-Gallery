@@ -1,0 +1,6 @@
+{
+  "name": "MW Bio Gallery",
+  "description": "Create a beautiful marriage biodata with MW Bio Gallery. Explore elegant templates, personalize your details, and print or save your biodata as a PDF.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
