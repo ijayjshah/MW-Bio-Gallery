@@ -110,7 +110,7 @@ export const sampleBiodataData: BiodataData = {
   lifestyle: 'Non-smoker, Non-drinker, Fitness enthusiast',
   hobbies: 'Classical Hindustani music, trekking in the Sahyadris, badminton, avid reader',
   aboutMe: 'A balanced individual grounded in family traditions with an open, progressive outlook. Passionate about technology, sustainable living, and exploring new cultures.',
-  photoUrl: '/src/assets/images/groom_portrait_sample_1791713482925.jpg',
+  photoUrl: '/images/groom_portrait_sample.jpg',
 
   highestQualification: 'Master of Science (Computer Science)',
   collegeUniversity: 'COEP Technological University, Pune',
