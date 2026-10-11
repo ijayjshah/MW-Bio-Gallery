@@ -1,4 +1,9 @@
 import { BiodataData } from './biodataTypes';
+import {
+  DEFAULT_GROOM_PORTRAIT,
+  DEFAULT_BRIDE_PORTRAIT,
+  SAMPLE_PORTRAITS,
+} from '../../assets/samplePortraits';
 
 export const initialBiodataData: BiodataData = {
   // Deity / Auspicious Invocation
@@ -89,7 +94,7 @@ export const initialBiodataData: BiodataData = {
   templateId: 'classic-elegance',
 };
 
-// Rich sample data for realistic showcase rendering on the homepage
+// Rich Groom sample data for realistic showcase rendering
 export const sampleBiodataData: BiodataData = {
   godName: '॥ श्री गणेशाय नमः ॥',
   showGodNameInPrint: true,
@@ -107,14 +112,14 @@ export const sampleBiodataData: BiodataData = {
   nationality: 'Indian',
   hometown: 'Pune',
   diet: 'Vegetarian',
-  lifestyle: 'Non-smoker, Non-drinker, Fitness enthusiast',
+  lifestyle: 'Non-smoker, Fitness enthusiast, Teetotaler',
   hobbies: 'Classical Hindustani music, trekking in the Sahyadris, badminton, avid reader',
   aboutMe: 'A balanced individual grounded in family traditions with an open, progressive outlook. Passionate about technology, sustainable living, and exploring new cultures.',
-  photoUrl: '/images/groom_portrait_sample.jpg',
+  photoUrl: DEFAULT_GROOM_PORTRAIT,
 
   highestQualification: 'Master of Science (Computer Science)',
   collegeUniversity: 'COEP Technological University, Pune',
-  additionalQualifications: 'B.Tech in Information Technology · Certified AWS Cloud Architect',
+  additionalQualifications: 'B.Tech in Information Technology · Certified AWS Solutions Architect',
   profession: 'Senior Software Engineer',
   jobTitle: 'Senior Engineering Lead',
   companyName: 'Global Cloud Systems India',
@@ -178,3 +183,122 @@ export const sampleBiodataData: BiodataData = {
 
   templateId: 'classic-elegance',
 };
+
+// Rich Bride sample data for realistic showcase rendering
+export const sampleBrideBiodataData: BiodataData = {
+  godName: '॥ श्री कुलस्वामिनी प्रसन्न ॥',
+  showGodNameInPrint: true,
+  fullName: 'Ananya S. Deshmukh',
+  dateOfBirth: '1998-09-22',
+  height: `5' 5" (165 cm)`,
+  currentCity: 'Mumbai',
+  currentState: 'Maharashtra',
+  gender: 'Female',
+  maritalStatus: 'Never Married',
+  religion: 'Hindu',
+  caste: 'Maratha / 96 Kuli',
+  motherTongue: 'Marathi',
+  languages: 'English, Marathi, Hindi',
+  nationality: 'Indian',
+  hometown: 'Kolhapur',
+  diet: 'Vegetarian',
+  lifestyle: 'Non-smoker, Yoga practitioner, Culturally rooted',
+  hobbies: 'Classical Bharatanatyam, interior architecture sketching, reading, classical music',
+  aboutMe: 'An energetic, affectionate person who blends artistic sensibility with strong cultural roots. Believes in mutual respect, laughter, and lifelong growth.',
+  photoUrl: DEFAULT_BRIDE_PORTRAIT,
+
+  highestQualification: 'Master of Architecture (Urban Design)',
+  collegeUniversity: 'Sir J.J. College of Architecture, Mumbai',
+  additionalQualifications: 'B.Arch (First Class with Distinction) · Registered Architect (COA)',
+  profession: 'Senior Urban Architect & Designer',
+  jobTitle: 'Senior Architectural Associate',
+  companyName: 'Atelier Design Studio Mumbai',
+  employmentType: 'Full-time Professional Practice',
+  workLocation: 'Bandra Kurla Complex, Mumbai',
+  annualIncome: '₹ 22,00,000 p.a.',
+  careerAbout: 'Specializing in sustainable heritage conservation and modern biophilic residential spaces. Passionate about craftsmanship and thoughtful design.',
+  showIncomeInPrint: true,
+  showCompanyInPrint: true,
+
+  fatherName: 'Shri Shashikant R. Deshmukh',
+  fatherOccupation: 'Executive Engineer (Retd. PWD Govt. of Maharashtra)',
+  motherName: 'Mrs. Jayashree S. Deshmukh',
+  motherOccupation: 'High School Principal (Retd.)',
+  
+  includeGrandparents: true,
+  paternalGrandfather: 'Late Shri Raosaheb Deshmukh (Landholder & Social Worker)',
+  paternalGrandmother: 'Late Smt. Parvatibai Deshmukh',
+  maternalGrandfather: 'Late Shri Dattajirao Patil (Freedom Fighter)',
+  maternalGrandmother: 'Smt. Shalinibai Patil',
+
+  siblingType: 'brother',
+  includeSiblingsInPrint: true,
+  brothers: [
+    {
+      id: 'bro-1',
+      name: 'Aditya S. Deshmukh',
+      age: '29',
+      maritalStatus: 'Married',
+      occupation: 'Investment Banker, Deutsche Bank Singapore',
+      details: 'Alumnus of IIM Ahmedabad · Settled in Singapore'
+    }
+  ],
+  sisters: [],
+
+  familyType: 'Nuclear Family',
+  familyValues: 'Cultured, warm, traditional with liberal values',
+  nativePlace: 'Karad, District Satara / Kolhapur',
+  currentFamilyLocation: 'Prabhadevi, Mumbai',
+  familyAbout: 'A noble, deeply respected family with generations of service in education and public administration.',
+
+  includePreferencesInPrint: true,
+  prefAgeRange: '27 to 32 years',
+  prefHeightRange: `5' 8" to 6' 2"`,
+  prefEducation: 'Well-educated professional (Engineering, Medicine, Management, Civil Services, or Architecture)',
+  prefProfession: 'Working in Mumbai / Pune / Abroad or established entrepreneur',
+  prefLocation: 'Mumbai, Pune, Bangalore or Metro cities',
+  prefLanguages: 'Marathi / English',
+  prefLifestyle: 'Vegetarian, family-loving, cheerful, mutual companionship',
+  prefFamilyType: 'Respected, cultured family background',
+  prefExpectations: 'Looking for a kind, ambitious, and understanding partner with whom to build a warm, happy life based on equality and family harmony.',
+
+  includeContactInPrint: true,
+  contactPersonName: 'Shri Shashikant Deshmukh (Father)',
+  contactRelation: 'Father',
+  contactPhone: '+91 98201 54321',
+  contactWhatsapp: '+91 98201 54321',
+  contactEmail: 'deshmukh.family.mumbai@gmail.com',
+  contactAddress: '702, Raj Bhavan Enclave, Prabhadevi, Mumbai - 400025',
+  contactInstructions: 'Feel free to connect on WhatsApp or call in the evenings (6:00 PM - 9:00 PM)',
+
+  templateId: 'royal-burgundy',
+};
+
+/**
+ * Returns authentic, beautiful sample data tailored to each template
+ * ensuring every reference template showcases a real high-res wedding portrait and god name.
+ */
+export function getSampleDataForTemplate(templateId: string): BiodataData {
+  const brideTemplates = [
+    'royal-burgundy',
+    'floral-grace',
+    'botanical-ivory',
+    'contemporary-portrait',
+    'graceful-rose',
+  ];
+
+  if (brideTemplates.includes(templateId)) {
+    return {
+      ...sampleBrideBiodataData,
+      templateId,
+      photoUrl: templateId === 'graceful-rose' ? SAMPLE_PORTRAITS.brideSample1 : DEFAULT_BRIDE_PORTRAIT,
+    };
+  }
+
+  return {
+    ...sampleBiodataData,
+    templateId,
+    photoUrl: templateId === 'contemporary-editorial' ? SAMPLE_PORTRAITS.groomSample1 : DEFAULT_GROOM_PORTRAIT,
+  };
+}
+

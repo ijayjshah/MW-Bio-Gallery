@@ -5,8 +5,7 @@
   --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-cinzel: 'Cinzel', serif;
-  --font-marcellus: 'Marcellus', serif;
-  --font-script: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
   --font-royal: 'Cinzel Decorative', serif;
   --font-devanagari: 'Rozha One', 'Cormorant Garamond', serif;
   --color-maroon-900: #310914;
@@ -16,7 +15,6 @@
   --color-cream: #F1E8DC;
   --color-gold: #C7A36A;
   --color-gold-dark: #A37F46;
-  --color-gold-light: #E0B979;
   --color-charcoal: #292122;
   --color-muted: #786B6B;
   --color-border-light: #E7DCD2;
@@ -37,60 +35,90 @@
   animation: gold-shimmer 4s linear infinite;
 }
 
-/* Royal Gold Pulsing Glow */
-@keyframes gold-glow {
-  0%, 100% {
-    box-shadow: 0 0 15px -3px rgba(199, 163, 106, 0.35), 0 0 6px -2px rgba(199, 163, 106, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 25px 2px rgba(199, 163, 106, 0.6), 0 0 12px 1px rgba(224, 185, 121, 0.4);
-  }
-}
-
-.animate-gold-glow {
-  animation: gold-glow 3s ease-in-out infinite;
-}
-
-/* Subtle floating wedding petals animation */
+/* Subtle floating wedding stationery animations */
 @keyframes gentle-float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(2deg); }
+  50% { transform: translateY(-8px) rotate(1.2deg); }
+}
+
+@keyframes gentle-float-alt {
+  0%, 100% { transform: translateY(0px) rotate(6deg); }
+  50% { transform: translateY(-6px) rotate(7.5deg); }
+}
+
+@keyframes gentle-float-neg {
+  0%, 100% { transform: translateY(0px) rotate(-4deg); }
+  50% { transform: translateY(-7px) rotate(-2.5deg); }
+}
+
+@keyframes gold-glow-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.06); }
+}
+
+@keyframes shine-sweep {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
 }
 
 .animate-float-slow {
   animation: gentle-float 6s ease-in-out infinite;
 }
 
-/* Sparkle twinkle animation */
-@keyframes twinkle {
-  0%, 100% { opacity: 0.3; transform: scale(0.85); }
-  50% { opacity: 1; transform: scale(1.15); }
+.animate-float-alt {
+  animation: gentle-float-alt 7s ease-in-out infinite 0.5s;
 }
 
-.animate-twinkle {
-  animation: twinkle 2.5s ease-in-out infinite;
+.animate-float-neg {
+  animation: gentle-float-neg 6.5s ease-in-out infinite 1s;
 }
 
-/* Wedding Ribbon banner shine */
-@keyframes ribbon-sweep {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(200%); }
+.animate-gold-glow {
+  animation: gold-glow-pulse 4s ease-in-out infinite;
 }
 
-.ribbon-shimmer-container {
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-up {
+  animation: slideUpFade 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.shine-effect {
   position: relative;
   overflow: hidden;
 }
 
-.ribbon-shimmer-container::after {
+.shine-effect::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 50%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
-  animation: ribbon-sweep 3.5s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  pointer-events: none;
+}
+
+.shine-effect:hover::after {
+  animation: shine-sweep 1s ease-in-out;
 }
 
 /* Custom Print Rules for A4 Biodata Export */

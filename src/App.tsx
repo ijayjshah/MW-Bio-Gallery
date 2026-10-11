@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { ScrollProgressBar } from './components/ScrollReveal';
 import { HomePage } from './pages/HomePage';
 import { CreateBiodataPage } from './pages/CreateBiodataPage';
 import { PrivacyPage } from './pages/PrivacyPage';
@@ -23,6 +24,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <ScrollProgressBar />
       <div className="min-h-screen flex flex-col bg-[#FAF6EF] text-[#292122] font-sans antialiased">
         <Navbar />
         <main className="flex-1">
